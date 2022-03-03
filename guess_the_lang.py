@@ -1,32 +1,6 @@
 import funz
 import parse as parse_data
 
-def get_input_dict():
-    input_file= input("che file si vuole leggere [default: input.txt]: ")
-
-    input_txt = funz.readfile(input_file if input_file is not "" else "input.txt")
-    input_txt = funz.cleanString(input_txt,keepAccents=True)
-    input_dict= funz.lettersAbsFreq(input_txt)
-    lettercnt = funz.lettersCount(input_txt)
-
-    if lettercnt is 0: #se il file è vuoto o inesistente termina
-        print("file insesistente")
-        exit()
-
-    #converti da frequenza assoluta a 0-100
-    for i in input_dict: 
-        input_dict[i] /= lettercnt / 100
-    
-    return input_dict
-
-def saveinfo(idict,matches):
-    debf = open("debug.txt",'w')
-    debf.write("input text data:" + str(idict) + "\n\nlang matching:\n")
-    for i,j in matches.items():
-        debf.write(i + ": " + str(j) + "\n")
-    debf.close()
-
-
 def guess_the_language():
     
     input_dict = get_input_dict()
@@ -56,10 +30,25 @@ def guess_the_language():
         if freq < dists[result]:
             result = lang
 
-    saveinfo(input_dict,dists)
-
     return result
 
+def get_input_dict():
+    input_file= input("che file si vuole leggere [default: input.txt]: ")
+
+    input_txt = funz.readfile(input_file if input_file is not "" else "input.txt")
+    input_txt = funz.cleanString(input_txt,keepAccents=True)
+    input_dict= funz.lettersAbsFreq(input_txt)
+    lettercnt = funz.lettersCount(input_txt)
+
+    if lettercnt is 0: #se il file è vuoto o inesistente termina
+        print("file insesistente")
+        exit()
+
+    #converti da frequenza assoluta a 0-100
+    for i in input_dict: 
+        input_dict[i] /= lettercnt / 100
+    
+    return input_dict
 
 #MAIN
 print(guess_the_language())
