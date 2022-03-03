@@ -18,13 +18,13 @@ def parse(rawlist):
 
     for i in firstline.split(","):
         langs[i.strip()] = {}
-    
+
     del rawlist[0]
 
     for line, letter in zip(rawlist, letters):
         vals = line.split(",")
         #inserisce una sola lettere per tutte lingue
-        # key , value = float val 
+        # key , value = float val
         for key, value in zip(langs.keys(),vals[1:]):
             langs[key][letter] = float(value)
 
@@ -32,7 +32,7 @@ def parse(rawlist):
 
 '''
 struttura dizionario
-{ 
+{
     "lang1" : { 'a' : X.XX , 'b' : X.XX , ...},
     "lang1" : { 'a' : X.XX , 'b' : X.XX , ...},
     "lang1" : { 'a' : X.XX , 'b' : X.XX , ...},
@@ -54,7 +54,7 @@ def betterparse(rawlist):
     langs = {}
     for i in firstline.split(","):
         langs[i.strip()] = {}
-    
+
     del rawlist[0]
 
     for line in rawlist:
@@ -70,5 +70,5 @@ def empty_dict(rawlist):
     letters = {}
     for s in rawlist:
         letters[s[0]] = 0
-    
+
     return letters
